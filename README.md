@@ -1,6 +1,6 @@
 # Vehicle Routing Problem with Time Windows
 
-### ¿Cómo ejecutar?
+### ¿Cómo ejecutar?
 1. Clonar el repositorio.
 2. Abrir una terminal en la carpeta clonada.
 3. Ejecutar el comando `make`, del cual se creará un 'exe'.
