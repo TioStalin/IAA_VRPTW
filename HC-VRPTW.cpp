@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
     if(test.size() >= 25){
       eleccion = 0;
     }
-    if(eleccion == 0){
+    if(eleccion == 0 && test.size() != 1){
       relocate(test, tiempo_inicio, tiempo_fin, tiempo_servicio, matrix_time);
       int distancia = verificar_calidad(test, matrix_time);
       if(distancia <= actual){
