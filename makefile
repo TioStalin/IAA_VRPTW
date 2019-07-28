@@ -7,7 +7,7 @@ HC:	HC-VRPTW.cpp
 	g++ -Wall HC-VRPTW.cpp funciones.cpp -o HC
 
 clean:
-	rm exe solucion.txt HC
+	rm exe solucion.txt HC solucionHC.txt
 
 run:
 	./exe
