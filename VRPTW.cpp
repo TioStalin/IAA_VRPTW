@@ -1,43 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#define INF 999999999
-
-int dist_manhattan(int x_inicial, int y_inicial, int x_final, int y_final){
-  return std::abs(x_inicial - x_final) + std::abs(y_inicial - y_final);
-}
-
-float dist_euclidian(int x_inicial, int y_inicial, int x_final, int y_final){
-  return sqrt(pow(x_inicial - x_final, 2) + pow(y_inicial - y_final, 2));
-}
-
-//Funcion para calcular la matrix de tiempos (para facilitar el problema, la distancia es igual al tiempo)
-
-void time_matrix(std::vector< std::vector<int> > &matrix, std::vector<int> x, std::vector<int> y, int cantidad){
-  for (int i = 0; i < cantidad; i++) {
-    std::vector<int> linea;
-    for (int j = 0; j < cantidad; j++) {
-      int distancia = dist_euclidian(x[i], y[i], x[j], y[j]);
-      if(distancia == 0){
-        linea.push_back(INF);
-      }
-      else{
-        linea.push_back(distancia);
-      }
-    }
-    matrix.push_back(linea);
-  }
-}
-
-//Funcion para verificar si todos los nodos fueron visitados
-
-int ruta_completa(std::vector<int> uso){
-  int suma = 0;
-  for (int i = 0; i < int(uso.size()); i++) {
-    suma += uso[i];
-  }
-  return suma;
-}
+#include "funciones.h"
 
 int main(){
 
@@ -77,10 +38,14 @@ int main(){
   int actual = 0;
   int vehiculos = 1;
   int tiempo = 0;
+  std::ofstream file;
+  file.open("solucion.txt");
+  file << actual << " ";
   while(ruta_completa(uso) != nodos){
     if(actual == 0 && distancia != 0){
       vehiculos++;
       tiempo = 0;
+      file << "\n" << "0 ";
     }
     //Se busca el camino mas corto dentro de la ventana de tiempo factible
     int min = INF;
@@ -97,6 +62,7 @@ int main(){
       tiempo = matrix_time[actual][0] + tiempo_servicio[0];
       distancia += matrix_time[actual][0];
       actual = 0;
+      file << actual << " ";
     }
     //Si es posible visitar un nodo factible, se espera a que su ventana de tiempo sea lograble
     else if(index == 0){
@@ -108,8 +74,11 @@ int main(){
       tiempo = matrix_time[actual][index] + tiempo_servicio[index];
       distancia += matrix_time[actual][index];
       actual = index;
+      file << actual << " ";
     }
   }
   std::cout << "Distancia recorrida: " << distancia + matrix_time[actual][0] << "\n" << "Cantidad de vehiculos usados: "<< vehiculos << "\n";
+  file << "0";
+  file.close();
   return 0;
 }
