@@ -57,7 +57,7 @@ int main(){
         index = i;
       }
     }
-    //Si no es posible cumplir con el recorrido, el vehiculo de devuelve
+    //Si no es posible cumplir con el recorrido, el vehiculo se devuelve
     if(tiempo > maxTime && index == 0){
       tiempo = matrix_time[actual][0] + tiempo_servicio[0];
       distancia += matrix_time[actual][0];
@@ -68,7 +68,7 @@ int main(){
     else if(index == 0){
       tiempo += 1;
     }
-    //El vehiculo de mueve al nuevo nodo
+    //El vehiculo se mueve al nuevo nodo
     else{
       uso[index] = 1;
       tiempo = matrix_time[actual][index] + tiempo_servicio[index];
